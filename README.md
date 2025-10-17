@@ -70,5 +70,6 @@ All services are containerized using **Docker** and orchestrated through **AKS**
 - Access to **Azure DevOps Pipelines**
 
 ### Screenshots
-<img src="https://github.com/Azure-DevOps/argocd1" alt="ArgoCD Dashboard Screenshot" width="800">
-<img src="https://github.com/Azure-DevOps/argocd2" alt="ArgoCD Dashboard Screenshot" width="800">
+<img src="argocd1.png" alt="ArgoCD Dashboard Screenshot" width="800">
+
+<img src="argocd2.png" alt="ArgoCD Dashboard Screenshot" width="800">
