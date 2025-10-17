@@ -18,53 +18,57 @@ The solution consists of the following components:
 - **Database (PostgreSQL):** Persistent data layer backed by Docker volumes.
 - **Results App (Node.js):** Displays live voting results.
 
-All services are containerized via **Docker** and orchestrated through **Azure Kubernetes Service (AKS)**.
+All services are containerized using **Docker** and orchestrated through **AKS**, while **ArgoCD** continuously syncs the Kubernetes manifests from the Git repository to ensure desired state consistency.
 
 ---
 
 ## Key Features
-- **Automated CI pipeline** using Azure DevOps for building, testing, and integrating services.
-- **Automated CD pipeline** deploying containers to AKS with VM Scale Sets.
-- **Containerized microservices** ensuring environmental consistency.
-- **Scalable and reliable** deployment using cloud-native infrastructure.
-- **Real-time processing** of votes through Redis and .NET worker service.
+- **Azure DevOps CI:** Automated build, test, and image push to **Azure Container Registry (ACR)**.
+- **ArgoCD CD:** GitOps-based continuous deployment to **AKS**.
+- **Containerized Microservices:** Ensures portability and consistency across environments.
+- **Scalable Deployment:** Leveraging **AKS** with **Virtual Machine Scale Sets (VMSS)**.
+- **Automated Rollbacks:** Managed through ArgoCD for reliability.
+- **Real-Time Data Processing:** Efficiently handled by Redis and .NET worker integration.
 
 ---
 
 ## Technology Stack
-| Component    | Technology Used |
-|---------------|----------------|
-| CI/CD         | Azure DevOps |
-| Front-End     | Python (Flask) |
-| Worker        | .NET Core |
-| Data Store    | Redis |
-| Database      | PostgreSQL (Docker volume) |
-| Result App    | Node.js |
-| Containerisation | Docker |
-| Deployment    | Azure Kubernetes Service (AKS) |
-| Scaling       | Azure Virtual Machine Scale Sets (VMSS) |
+| Component         | Technology Used |
+|--------------------|----------------|
+| CI/CD Framework    | Azure DevOps + ArgoCD |
+| Front-End          | Python (Flask) |
+| Worker             | .NET Core |
+| Data Store         | Redis |
+| Database           | PostgreSQL (Docker volume) |
+| Results Dashboard  | Node.js |
+| Containerisation   | Docker |
+| Orchestration      | Azure Kubernetes Service (AKS) |
+| Scaling            | Azure Virtual Machine Scale Sets (VMSS) |
 
 ---
 
 ## Pipeline Workflow
 
-### Continuous Integration (CI)
-1. **Code Commit:** Developers push changes to Azure Repos.
-2. **Build Trigger:** Azure DevOps pipeline builds each service.
-3. **Testing:** Automated unit and integration tests executed.
-4. **Image Build:** Docker images created and pushed to Azure Container Registry (ACR).
+### Continuous Integration (Azure DevOps)
+1. **Code Commit:** Developer pushes code to the repository.  
+2. **Build Trigger:** Azure DevOps initiates the CI pipeline.  
+3. **Unit Testing:** Automated tests validate code quality.  
+4. **Image Build:** Docker images are built and pushed to **Azure Container Registry (ACR)**.
 
-### Continuous Deployment (CD)
-1. **Deployment:** Updated images deployed to AKS.
-2. **Scaling:** VM Scale Sets handle horizontal scaling.
-3. **Validation:** Application monitored and verified post-deployment.
+### Continuous Deployment (ArgoCD)
+1. **GitOps Deployment:** ArgoCD continuously monitors the Git repository for manifest changes.  
+2. **Sync Process:** Updates are automatically deployed to the **AKS** cluster.  
+3. **Health Monitoring:** ArgoCD dashboard tracks application health and rollout progress.  
+4. **Auto-Rollback:** Automatically restores previous stable versions if deployment issues occur.
 
 ---
 
-## Setup Instructions
-
 ### Prerequisites
-- Active **Azure Subscription**
-- **Docker** and **Kubernetes CLI** installed locally
-- Access to **Azure Container Registry (ACR)**
-- **Azure CLI** configured
+- Azure Subscription with **AKS** and **ACR**
+- **Azure CLI**, **kubectl**, and **Docker** installed locally
+- **ArgoCD** installed and configured in AKS
+- Access to **Azure DevOps Pipelines**
+
+### Screenshots
+<img src="https://github.com/Azure-DevOps/argocd1" alt="ArgoCD Dashboard Screenshot" width="800">
+<img src="https://github.com/Azure-DevOps/argocd2" alt="ArgoCD Dashboard Screenshot" width="800">
